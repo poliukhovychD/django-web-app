@@ -1,0 +1,54 @@
+{% load static %}
+
+<!-- add a button to toggle the filters container -->
+<p id="filterBtn">Filters</p>
+
+<!-- filters container -->
+<div id="filtersContainer" style="display: none; display: flex; flex-wrap: wrap; justify-content: space-between;">
+  <!-- Price Filter -->
+  <div class="list-group list-group-flush">
+    <li class="list-group-item">
+      <a id="priceFilterBtn" >Filter $ (max)</a>
+    </li>
+    <input type="number" value="{{minMaxPrice.price__min}}" max={{minMaxPrice.price__max}} min={{minMaxPrice.price__min}} class="form-control" id="maxPrice" onkeyup="rangeInput.value=this.value" id="maxPrice" />
+  </div>
+
+  <!-- Categories Filter -->
+  <div class="list-group list-group-flush">
+    {% for cat in cats %}
+    <li class="list-group-item">
+      <input class="filter-checkbox" data-filter="category" value="{{cat.category__id}}" type="checkbox" />&nbsp;
+      {{cat.category__title}}
+    </li>
+    {% endfor %}
+  </div>
+
+  <!-- Brands Filter -->
+  <div class="list-group list-group-flush">
+    {% for brand in brands %}
+    <li class="list-group-item">
+      <input class="filter-checkbox" data-filter="brand" value="{{brand.brand__id}}" type="checkbox" />&nbsp;
+      {{brand.brand__title}}
+    </li>
+    {% endfor %}
+  </div>
+
+  <!-- Sizes Filter -->
+  <div class="list-group list-group-flush">
+    {% for size in sizes %}
+    <li class="list-group-item">
+      <input class="filter-checkbox" data-filter="size" value="{{size.size__id}}" type="checkbox" />&nbsp;
+      {{size.size__title}}
+    </li>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- add a script to toggle the filters container when the button is clicked -->
+<script type="text/javascript" src="{% static 'product-filter.js' %}"></script>
+<script type="text/javascript">
+  document.getElementById("filterBtn").addEventListener("click", function() {
+    var filtersContainer = document.getElementById("filtersContainer");
+    filtersContainer.style.display = (filtersContainer.style.display === "none") ? "flex" : "none";
+  });
+</script>

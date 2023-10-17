@@ -1,0 +1,26 @@
+{% for product in data %}
+				<div class="col-lg-3 col-md-6 mb-4 product-box">
+						<div class="product-card">
+					  <a href="/product/{{product.slug}}/{{product.id}}"><img src="/media/{{product.productattribute_set.first.image}}" class="card-img-top mx-auto" alt="{{product.title}}"></a>
+					    <h5 class="card-text"><a href="/product/{{product.slug}}/{{product.id}}">{{product.title}}</a></h5>
+					    <h6>$ <span class="product-price-{{product.id}}">{{product.productattribute_set.first.price}}</span></h6>
+				          <input type="hidden" value="1" class="form-control product-qty-{{product.id}}" id="productQty" />
+				          <input type="hidden" class="product-image-{{product.id}}" value="{{product.productattribute_set.first.image}}" />
+				          <input type="hidden" class="product-id-{{product.id}}" value="{{product.id}}" />
+				          <input type="hidden" class="product-title-{{product.id}}" value="{{product.title}}" />
+							  {% if user.is_authenticated %}
+<a class="add-to-cart mr-2" data-index="{{product.id}}"><i class="fa fa-shopping-cart"></i></a>
+							<span class="float-right">
+							  		4.5/5
+							  		<i class="fa fa-star text-warning"></i>
+							  	</span>
+							<a class="add-to-cart mr-2" data-index="{{product.id}}"><i class="fa fa-shopping-cart"></i></a>
+<a class="add-wishlist ml-2" data-product="{{product.id}}"><i class="fa fa-heart"></i></a>
+{% else %}
+<a class="disabled"><i class="fa fa-heart"></i></a>
+{% endif %}
+
+					  	</div>
+				</div>
+				{% endfor %}
+			

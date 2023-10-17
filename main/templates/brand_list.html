@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+
+
+		.row {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+		}
+
+		.col-3 {
+			flex: 0 0 25%;
+		}
+
+		.card-img-top {
+			width: 100%;
+			height: auto;
+		}
+
+		.align-items-center {
+			align-items: center;
+		}
+		.card-img-top {
+  width: 50%;
+  height: auto;
+}
+
+	</style>
+
+	<main class="container my-4">
+		<!-- Featured Products -->
+		<div class="row">
+			<h2 class="text-center mt-0">Brands</h2>
+			 <hr class="divider" />
+			<div class="row gx-4 gx-lg-5 justify-content-center">
+			{% if data %}
+				{% for brand in data %}
+				<div class="col-3 my-4">
+					<a href="/brand-product-list/{{brand.id}}">
+						<img src="/media/{{brand.image}}" class="card-img-top" alt="{{brand.title}}" title="{{brand.title}}" id="{{brand.id}}"/>
+					</a>
+				</div>
+				{% endfor %}
+			{% endif %}
+				</div>
+		</div>
+	</main>
+
+
+{% endblock %}
